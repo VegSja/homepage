@@ -1,0 +1,19 @@
+---
+import Icon from './Icon.astro';
+const year = new Date().getFullYear();
+---
+<footer class="mt-20 border-t border-gray-200 dark:border-gray-800">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between">
+    <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 md:mb-0">
+      &copy; {year} Vegard Sjåvik. All rights reserved.
+    </p>
+    <div class="flex space-x-6">
+      <a href="mailto:vgsjaavik@gmail.com" class="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors" aria-label="Email">
+        <Icon name="email" class="w-5 h-5" />
+      </a>
+      <a href="https://github.com/VegSja" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors" aria-label="GitHub">
+        <Icon name="github" class="w-5 h-5" />
+      </a>
+    </div>
+  </div>
+</footer>

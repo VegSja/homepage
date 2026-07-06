@@ -1,0 +1,35 @@
+---
+import Icon from './Icon.astro';
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+<div class="flex flex-col h-full border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 rounded-xl p-6 hover:border-accent-500/50 hover:shadow-sm transition-all duration-200 group">
+  <div class="flex justify-between items-start mb-4">
+    <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors">
+      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="focus:outline-none">
+        <span class="absolute inset-0" aria-hidden="true"></span>
+        {project.title}
+      </a>
+    </h3>
+    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-900 dark:hover:text-white z-10" aria-label="GitHub Repository">
+      <Icon name="github" class="w-5 h-5" />
+    </a>
+  </div>
+  
+  <p class="text-gray-600 dark:text-gray-400 mb-6 flex-grow">
+    {project.description}
+  </p>
+  
+  <div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-gray-100 dark:border-gray-800/50">
+    {project.tech.map(tech => (
+      <span class="text-xs font-mono text-gray-500 dark:text-gray-400">
+        {tech}
+      </span>
+    ))}
+  </div>
+</div>

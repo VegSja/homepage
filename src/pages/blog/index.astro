@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
+const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Blog | Vegard" description="Thoughts on data engineering, the financial sector, and software architecture.">
+  <header class="mb-12">
+    <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">Writing</h1>
+    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
+      Thoughts, tutorials, and rants about data engineering, dbt, Spark, and surviving the modern data stack.
+    </p>
+  </header>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+    {sortedPosts.map(post => (
+      <BlogCard post={post} />
+    ))}
+  </div>
+</BaseLayout>

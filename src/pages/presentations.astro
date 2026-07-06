@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PresentationCard from '../components/PresentationCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPresentations = await getCollection('presentations');
+const sortedPresentations = allPresentations.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Presentations | Vegard" description="Talks and presentations on data engineering.">
+  <header class="mb-12">
+    <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">Presentations</h1>
+    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
+      Slides and repositories for talks I've given at meetups, conferences, and internal workshops. I prefer to write presentations as code.
+    </p>
+  </header>
+
+  <div class="border-t border-gray-200 dark:border-gray-800">
+    {sortedPresentations.map(presentation => (
+      <PresentationCard presentation={presentation} />
+    ))}
+  </div>
+</BaseLayout>

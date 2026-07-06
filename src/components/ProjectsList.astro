@@ -1,0 +1,28 @@
+---
+import { projects } from '../data/projects';
+import ProjectCard from './ProjectCard.astro';
+
+interface Props {
+  tier?: 1 | 2;
+  featuredOnly?: boolean;
+  limit?: number;
+}
+
+const { tier, featuredOnly = false, limit } = Astro.props;
+
+let filteredProjects = projects;
+if (tier) {
+  filteredProjects = filteredProjects.filter(p => p.tier === tier);
+}
+if (featuredOnly) {
+  filteredProjects = filteredProjects.filter(p => p.featured);
+}
+if (limit) {
+  filteredProjects = filteredProjects.slice(0, limit);
+}
+---
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  {filteredProjects.map(project => (
+    <ProjectCard project={project} />
+  ))}
+</div>

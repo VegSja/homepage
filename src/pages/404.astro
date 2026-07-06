@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/urls';
+---
+
+<BaseLayout title="404: Not Found">
+  <div class="flex flex-col items-center justify-center py-20 text-center">
+    <h1 class="text-9xl font-extrabold text-gray-200 dark:text-gray-800 tracking-widest mb-4 font-mono">404</h1>
+    <div class="bg-accent-500 px-2 text-sm rounded rotate-12 absolute shadow-sm">
+      Page Not Found
+    </div>
+    <p class="text-xl text-gray-600 dark:text-gray-400 mt-8 mb-8">
+      Oops! The pipeline broke and we lost this page.
+    </p>
+    <a href={withBase('/')} class="inline-flex items-center px-5 py-3 rounded-lg bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors">
+      Return Home
+    </a>
+  </div>
+</BaseLayout>
