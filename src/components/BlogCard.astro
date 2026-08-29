@@ -12,6 +12,8 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
   month: 'short',
   day: 'numeric',
 });
+const isExternal = Boolean(post.data.externalUrl);
+const href = isExternal ? post.data.externalUrl! : withBase(`/blog/${post.slug}`);
 ---
 <article class="group relative flex flex-col items-start justify-between">
   <div class="flex items-center gap-x-4 text-xs font-mono text-gray-500 dark:text-gray-400 mb-3">
@@ -21,10 +23,15 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
         {post.data.tags[0]}
       </span>
     )}
+    {isExternal && (
+      <span class="relative z-10 rounded-full bg-accent-500/10 text-accent-600 dark:text-accent-400 px-3 py-1.5 font-medium">
+        External ↗
+      </span>
+    )}
   </div>
   <div class="group relative">
     <h3 class="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors">
-      <a href={withBase(`/blog/${post.slug}`)}>
+      <a href={href} {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
         <span class="absolute inset-0"></span>
         {post.data.title}
       </a>
